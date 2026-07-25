@@ -1,7 +1,9 @@
 package org.uam.serviceinventario.service;
 
 import org.modelmapper.ModelMapper;
+import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 import org.uam.serviceinventario.dto.AdministradorDTO;
 import org.uam.serviceinventario.dto.AdministradorDTOM;
 import org.uam.serviceinventario.model.Administrador;
@@ -17,10 +19,12 @@ public class ServiceAdministrador {
 
     private final AdministradorRepo administradorRepo;
     private final ModelMapper modelMapper;
+    private final FileService fileService;
 
-    public ServiceAdministrador(AdministradorRepo administradorRepo, ModelMapper modelMapper) {
+    public ServiceAdministrador(AdministradorRepo administradorRepo, ModelMapper modelMapper, FileService fileService) {
         this.administradorRepo = administradorRepo;
         this.modelMapper = modelMapper;
+        this.fileService = fileService;
     }
 
     public List<AdministradorDTOM> findAll() {
@@ -38,6 +42,23 @@ public class ServiceAdministrador {
 
     public AdministradorDTO save(AdministradorDTO administradorDTO) {
         return convertToDTO(administradorRepo.save(convertToEntity(administradorDTO)));
+    }
+
+    public Resource loadImagen(String fileName) throws Exception {
+        return fileService.loadImage(fileName);
+    }
+
+    public AdministradorDTO save(String nombre, String apellido, String email
+            , String cedula, String areaAdministrativa, MultipartFile imagen) throws Exception {
+        Administrador administrador = new Administrador();
+        administrador.setNombre(nombre);
+        administrador.setApellido(apellido);
+        administrador.setEmail(email);
+        administrador.setCedula(cedula);
+        administrador.setAreaAdministrativa(areaAdministrativa);
+        String imagenNombre = fileService.saveImagen(imagen);
+        administrador.setImagen(imagenNombre);
+        return convertToDTO(administradorRepo.save(administrador));
     }
 
     private Administrador convertToEntity(AdministradorDTO dto) {
@@ -58,8 +79,10 @@ public class ServiceAdministrador {
           entity.getApellido(),
           entity.getEmail(),
           entity.getCedula(),
-          entity.getAreaAdministrativa()
+          entity.getAreaAdministrativa(),
+          entity.getImagen()
         );
     }
+
 
 }

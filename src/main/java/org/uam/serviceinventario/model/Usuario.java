@@ -17,6 +17,7 @@ public abstract class Usuario extends BaseEntity{
     private String email;
     @NotBlank(message = "La cedula no puede estar vacia")
     private String cedula;
+    private String imagen;
 
     public String getNombre() {
         return nombre;
@@ -48,5 +49,13 @@ public abstract class Usuario extends BaseEntity{
 
     public void setCedula(String cedula) {
         this.cedula = cedula;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

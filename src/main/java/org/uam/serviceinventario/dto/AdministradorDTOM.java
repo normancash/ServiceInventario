@@ -10,6 +10,7 @@ public class AdministradorDTOM {
     private String email;
     private String cedula;
     private String areaAdministrativa;
+    private String imagen;
 
     public UUID getUuid() {
         return uuid;
@@ -57,5 +58,13 @@ public class AdministradorDTOM {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+
+    public String getImagen() {
+        return imagen;
+    }
+
+    public void setImagen(String imagen) {
+        this.imagen = imagen;
     }
 }

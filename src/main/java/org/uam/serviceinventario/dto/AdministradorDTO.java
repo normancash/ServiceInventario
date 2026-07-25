@@ -10,6 +10,7 @@ public record AdministradorDTO(
         String apellido,
         String email,
         String cedula,
-        String areaAdministrativa
+        String areaAdministrativa,
+        String imagen
 ) {
 }
