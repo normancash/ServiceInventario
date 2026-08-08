@@ -4,6 +4,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.uam.serviceinventario.model.Municipio;
 
+import java.util.UUID;
+
 @Repository
-public interface MunicipioRepo extends JpaRepository<Municipio,UUID> {
+public interface MunicipioRepo extends JpaRepository<Municipio, UUID> {
 }

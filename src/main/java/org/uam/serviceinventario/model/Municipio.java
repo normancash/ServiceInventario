@@ -20,11 +20,11 @@ public class Municipio {
     @JoinColumn(name="departamento_id")
     private Departamento departamento;
 
-    public String getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
